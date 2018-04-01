@@ -1,0 +1,3 @@
+*.csv
+geckodriver.log
+.DS_Store
