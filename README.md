@@ -2,7 +2,7 @@
 
 Google scholar doesn't have an API to download all the papers that cites yours. This hack loads all the citations on your profile page and enter each one to write its title/authors/proceeding in one txt file
 
-## How to use 
+## How to use
 
 Follow the instruction to install https://www.seleniumhq.org/
 
@@ -18,10 +18,10 @@ Run googleScholar.py to start scraping.
 Google might check if you're a robot. For that sake, I added a pause
 
 ```
-when webpage is ready, click enter: 
+When webpage is ready, press enter.
 ```
 
-Finish your Robot challenge if Google insists. After that, hit enter in commandline to keep going. 
+Finish your Robot challenge if Google insists. After that, hit enter in commandline to keep going.
 
 
 ## Built With
@@ -30,6 +30,6 @@ Finish your Robot challenge if Google insists. After that, hit enter in commandl
 
 ## License
 
-This project is licensed under the MIT License 
+This project is licensed under the MIT License
 
 

@@ -1,6 +1,9 @@
-#!/usr/bin/python
+#! /usr/bin/env
 
+
+# Your Google Scholar ID:
 USER_ID = 'aaTHLnkAAAAJ'
+
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -8,9 +11,22 @@ from selenium.webdriver.common.by import By
 from time import sleep
 import csv
 import random
+import platform
+import sys
 
 
-driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
+
+PLATFORM = platform.system()
+if "Darwin" in PLATFORM:
+    PATH = ""
+elif "Linux" in PLATFORM:
+    PATH = "/usr/lib/chromium-browser/chromedriver"
+else:
+    print("!!! Error: platform not supported !!!")
+    sys.exit(-1)
+
+
+driver = webdriver.Chrome(PATH)
 
 #gs_ri  citation
 #gs_rt titles
@@ -73,7 +89,7 @@ def webToTXT():
 def loadAllCitationsFromLink(link):
 	#the first page of the scholar citation page
 	driver.get(link)
-	raw_input("when webpage is ready, click enter: ")
+	raw_input("When webpage is ready, press enter.")
 	while True:
 		webToTXT()
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
