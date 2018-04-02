@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+USER_ID = 'aaTHLnkAAAAJ'
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -91,7 +93,8 @@ EXPORT TXT
 '''
 with open('citations.txt', 'w') as file:
 	#this is the main google scholar profile page
-	driver.get("https://scholar.google.com/citations?user=aaTHLnkAAAAJ&hl=en&oi=sra")
+	driver.get("https://scholar.google.com/citations?user=" + USER_ID)
+
 	raw_input("when webpage is ready, click enter.")
 	#find all citation links
 	links = []
