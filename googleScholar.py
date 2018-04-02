@@ -3,18 +3,18 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from time import sleep 
+from time import sleep
 import csv
-import random 
+import random
 
 
 driver = webdriver.Chrome()
 
 #gs_ri  citation
 #gs_rt titles
-#gs_a authors 
+#gs_a authors
 
-index = 1 
+index = 1
 
 def dequote(s):
     """
@@ -32,9 +32,8 @@ def webToCSV():
 	for c in citations:
 		title = c.find_element_by_xpath('.//h3[@class="gs_rt"]').text
 		title = dequote(title)
-		
+
 		authors = c.find_elements_by_xpath('.//div[@class="gs_a"]')[0].text
-		#authors = c.find_elements_by_xpath('.//div[@class="gs_a"]/a')  #dont include the procceding name 
 		writer.writerow([str(index)] + [title])
 		writer.writerow([authors])
 		writer.writerow('\n') #spacer between entries
@@ -42,25 +41,8 @@ def webToCSV():
 
 
 '''
-EXPORT CSV 
+EXPORT CSV
 '''
-# with open('citations.csv', 'w',newline='') as csvfile:
-
-# 	writer = csv.writer(csvfile)
-# 	while True: 
-# 		webToCSV()
-# 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-# 		sleep(1) #time for the page to scroll down and make the next button visiable
-# 		# click next button
-# 		try:
-# 			# Note that when debug window is open on the side, the HTML elements are different! 
-# 			# Use debug window on the bottom to identify the class name.
-# 			# submit_button = driver.find_elements_by_xpath('//*[@id="gs_nm"]/button')[1] #  button for next page
-# 			next_button = driver.find_element_by_class_name("gs_ico_nav_next")
-# 			next_button.click()
-# 		except:
-# 			driver.close()
-# 			break
 
 def webToTXT():
 	global index
@@ -68,12 +50,12 @@ def webToTXT():
 	for c in citations:
 		title = c.find_element_by_xpath('.//h3[@class="gs_rt"]').text
 		title = dequote(title)
-		
+
 		authors = c.find_elements_by_xpath('.//div[@class="gs_a"]')[0].text
-		'''authors = c.find_elements_by_xpath('.//div[@class="gs_a"]/a')  #dont include the procceding name 
+		'''authors = c.find_elements_by_xpath('.//div[@class="gs_a"]/a')  #dont include the procceding name
 		s=''
-		for a in authors: 
-			s += a.text 
+		for a in authors:
+			s += a.text
 			s += ', '
 		if len(authors)>0:
 			s = s[0:-2]
@@ -90,19 +72,17 @@ def loadAllCitationsFromLink(link):
 	#the first page of the scholar citation page
 	driver.get(link)
 	input("when webpage is ready, click enter: ")
-	while True: 
+	while True:
 		webToTXT()
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 		sleep(random.random()*50) #time for the page to scroll down and make the next button visiable
 		# click next button
 		try:
-			# Note that when debug window is open on the side, the HTML elements are different! 
+			# Note that when debug window is open on the side, the HTML elements are different!
 			# Use debug window on the bottom to identify the class name.
-			# submit_button = driver.find_elements_by_xpath('//*[@id="gs_nm"]/button')[1] #  button for next page
 			next_button = driver.find_element_by_class_name("gs_ico_nav_next")
 			next_button.click()
 		except:
-			# driver.close()
 			break
 
 
@@ -118,13 +98,12 @@ with open('citations.txt', 'w') as file:
 	for l in driver.find_elements_by_xpath('.//a[@class="gsc_a_ac gs_ibl"]'):
 		if l.text != '' :
 			print(l.get_attribute('href'))
-		# loadAllCitationsFromLink("https://scholar.google.com/scholar?cites=7079466816456614288&as_sdt=2005&sciodt=0,5&hl=en")
-			links.append(l.get_attribute('href'))		
+			links.append(l.get_attribute('href'))
 
 	for l in links:
 		sleep(random.random()*30)
-		loadAllCitationsFromLink(l)	
-	
+		loadAllCitationsFromLink(l)
+
 	file.close()
 	driver.close()
 
