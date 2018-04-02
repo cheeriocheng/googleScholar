@@ -1,4 +1,4 @@
-#!/Users/xx/.local/share/virtualenvs/googleScholar-cO_WMZC9/bin/python
+#!/usr/bin/python
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -8,7 +8,7 @@ import csv
 import random
 
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
 
 #gs_ri  citation
 #gs_rt titles
@@ -60,9 +60,9 @@ def webToTXT():
 		if len(authors)>0:
 			s = s[0:-2]
 		'''
-		file.write(str(index) + ' "' + title + '"')
+		file.write(str(index) + ' "' + title.encode('utf-8').strip() + '"')
 		file.write('\n')
-		file.write(authors)
+		file.write(authors.encode('utf-8').strip())
 		file.write('\n')
 		file.write('\n')
 		print("Citations found: " + str(index))
@@ -71,7 +71,7 @@ def webToTXT():
 def loadAllCitationsFromLink(link):
 	#the first page of the scholar citation page
 	driver.get(link)
-	input("when webpage is ready, click enter: ")
+	raw_input("when webpage is ready, click enter: ")
 	while True:
 		webToTXT()
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -92,7 +92,7 @@ EXPORT TXT
 with open('citations.txt', 'w') as file:
 	#this is the main google scholar profile page
 	driver.get("https://scholar.google.com/citations?user=aaTHLnkAAAAJ&hl=en&oi=sra")
-	input("when webpage is ready, click enter: ")
+	raw_input("when webpage is ready, click enter.")
 	#find all citation links
 	links = []
 	for l in driver.find_elements_by_xpath('.//a[@class="gsc_a_ac gs_ibl"]'):
