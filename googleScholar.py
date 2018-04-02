@@ -110,7 +110,7 @@ def loadAllCitationsFromLink(link):
 EXPORT TXT
 '''
 with open('citations.txt', 'w') as file:
-	#this is the main google page
+	#this is the main google scholar profile page
 	driver.get("https://scholar.google.com/citations?user=aaTHLnkAAAAJ&hl=en&oi=sra")
 	input("when webpage is ready, click enter: ")
 	#find all citation links

@@ -13,6 +13,8 @@ Change the url to your own google scholar page
 	driver.get("https://scholar.google.com/citations?user=aaTHLnkAAAAJ&hl=en&oi=sra")
 ```
 
+Run googleScholar.py to start scraping.
+
 Google might check if you're a robot. For that sake, I added a pause
 
 ```
