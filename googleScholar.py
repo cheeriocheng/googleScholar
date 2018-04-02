@@ -77,7 +77,7 @@ def loadAllCitationsFromLink(link):
 	while True:
 		webToTXT()
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-		sleep(random.random()*50) #time for the page to scroll down and make the next button visiable
+		sleep(random.random()*3+1) #time for the page to scroll down and make the next button visiable
 		# click next button
 		try:
 			# Note that when debug window is open on the side, the HTML elements are different!
@@ -104,7 +104,7 @@ with open('citations.txt', 'w') as file:
 			links.append(l.get_attribute('href'))
 
 	for l in links:
-		sleep(random.random()*30)
+		sleep(random.random()*3+1)
 		loadAllCitationsFromLink(l)
 
 	file.close()
